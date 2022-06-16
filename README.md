@@ -15,6 +15,8 @@
 
 I have seen too many kids uploading other people's TikToks to YouTube and getting 10k+ subscribers in in a few months so I decided to make this process as easy as possible and start grinding that YouTube bag 💰. TikTuber is designed to alert you on Discord when new TikTok gets uploaded by someone you have added to watchlist. You can watch the video, give it a title and simply upload it to YouTube from Discord via `/upload id title`-command. I would have made this fully automatic, but in order to get view to uploaded videos good title is required. 🤥
 
+[See this project in action](https://www.youtube.com/channel/UCPz6qkfH42NtfMHAoQS290w/videos)
+
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
