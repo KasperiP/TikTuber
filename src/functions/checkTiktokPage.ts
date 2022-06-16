@@ -38,14 +38,16 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
     return links.map((link) => link.src);
   });
 
-  if (videoLinks.length !== 1) {
+  if (
+    videoLinks.length !== 1 ||
+    !videoLinks[0].includes("v16-webapp.tiktok.com")
+  ) {
     logger.info("Coulnd't find video link. Skipping...");
     await browser.close();
     return false;
   }
 
   const link = videoLinks[0];
-
   const linkSplit = link.split("/");
   const videoId = linkSplit[linkSplit.length - 2];
 
