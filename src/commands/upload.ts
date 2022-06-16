@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { Client, CommandInteraction } from "discord.js";
 import { uploadToYoutube } from "../functions/uploadToYoutube";
 import Videos from "../schemas/videoSchema";
+import { logger } from "../utils/logger";
 
 export default {
   data: new SlashCommandBuilder()
@@ -33,6 +34,7 @@ export default {
     });
 
     if (!video) {
+      logger.warn("Video couldn't be uploaded. Not found or already uploaded.");
       return interaction.editReply("Videota ei löytynyt tai se on jo ladattu.");
     }
 
