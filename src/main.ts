@@ -9,11 +9,12 @@ dotenv.config();
 const MongoURI = process.env.MONGODB_URI;
 
 const checkVideos = async () => {
+  logger.info("Starting to check TikTok videos.");
   for await (const influencer of tiktokerList) {
-    const uploaded = await checkTiktokPage(influencer);
-
+    await checkTiktokPage(influencer);
     await new Promise((resolve) => setTimeout(resolve, 5000));
   }
+  logger.info("Checked all TikTokers in the list. Waiting for next check.");
 };
 
 (async () => {
