@@ -11,9 +11,15 @@ export const sendWebhook = async (
   const embed = new MessageEmbed()
     .setTitle("Uusi TikTok-video käyttäjältä " + influencer)
     .setColor("#0099ff")
-    .addField("Videon ID:", id)
-    .addField("Videon URL:", url);
+    .addField("Videon ID:", "```yaml\n" + id + "\n```")
+    .addField("Katso video:", `[Klikkaa tästä!](${url})`)
+    .setColor("GREEN")
+    .setFooter({
+      text: "TikTuber",
+    })
+    .setTimestamp();
 
+  // Send id for easier mobile copy
   await webhookClient.send({
     content: `<@${process.env.DISCORD_OWNER_ID}>`,
     embeds: [embed],
