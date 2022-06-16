@@ -1,12 +1,12 @@
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import { Client } from "discord.js";
 import { readdirSync } from "fs";
+import { logger } from "../utils/logger";
 
 export default {
   name: "ready",
   once: true,
-  async execute(client: Client) {
+  async execute() {
     // Get all commands
     const path = `${__dirname}/../commands`;
     const commands = [];
@@ -34,9 +34,9 @@ export default {
           }
         );
 
-        console.log("> Discord commands registered");
+        logger.info("Registered bot commands");
       } catch (error) {
-        console.error(error);
+        logger.error("Error while registering commands:\n" + error);
       }
     })();
   },

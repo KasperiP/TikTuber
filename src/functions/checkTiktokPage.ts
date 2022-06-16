@@ -2,12 +2,13 @@ import axios from "axios";
 import fs from "fs";
 import puppeteer from "puppeteer";
 import Videos from "../schemas/videoSchema";
+import { logger } from "../utils/logger";
 import { sendWebhook } from "./webhookSender";
 
 const BASE_URL = "https://www.tiktok.com/";
 
 export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
-  console.log(`> Checking ${influencer} page for new videos...`);
+  logger.info(`Checking ${influencer} page for new videos`);
 
   const browser = await puppeteer.launch({
     headless: true,
@@ -22,7 +23,7 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
     await page.goto(`${BASE_URL}/@${influencer}`);
   } catch (error) {
     await browser.close();
-    console.error("> Loading page took too long. Skipping...");
+    logger.info("Loading page took too long. Skipping...");
     return false;
   }
 
@@ -33,7 +34,7 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
   });
 
   if (videoLinks.length !== 1) {
-    console.log("> Cound't find video link");
+    logger.info("Coulnd't find video link. Skipping...");
     await browser.close();
     return false;
   }
@@ -49,12 +50,12 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
   });
 
   if (exists) {
-    console.log("> No new videos found");
+    logger.info("Video already exists. Skipping...");
     await browser.close();
     return false;
   }
 
-  console.log("> Found new video:", link);
+  logger.info(`Found new video`);
 
   const response = await axios.get(link + ".mp4", {
     responseType: "stream",
@@ -63,7 +64,7 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
   const FILE_NAME = `${influencer}-${videoId}`;
   const PATH = `./videos/${influencer}/${FILE_NAME}.mp4`;
 
-  console.log("> Saving video to:", PATH);
+  logger.info(`Saving video to ${PATH}`);
 
   // If path does not exist, create it
   if (!fs.existsSync(`./videos/${influencer}`)) {

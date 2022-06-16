@@ -4,6 +4,7 @@ import cron from "node-cron";
 import { tiktokerList } from "./constants/tiktokerList";
 import { checkTiktokPage } from "./functions/checkTiktokPage";
 import { initializeBot } from "./functions/initializeBot";
+import { logger } from "./utils/logger";
 dotenv.config();
 const MongoURI = process.env.MONGODB_URI;
 
@@ -22,7 +23,7 @@ const checkVideos = async () => {
 
   try {
     await mongoose.connect(MongoURI);
-    console.log("> Connected to MongoDB");
+    logger.info("Connected to MongoDB.");
   } catch (err) {
     throw new Error("MongoDB connection error");
   }

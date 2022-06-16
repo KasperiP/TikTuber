@@ -4,6 +4,7 @@ import {
   GuildMember,
   Permissions,
 } from "discord.js";
+import { logger } from "../utils/logger";
 
 export default {
   name: "interactionCreate",
@@ -23,7 +24,7 @@ export default {
       try {
         await command.execute(client, interaction);
       } catch (error) {
-        console.error(error);
+        logger.error("Error while executing command:\n" + error);
       }
     }
   },

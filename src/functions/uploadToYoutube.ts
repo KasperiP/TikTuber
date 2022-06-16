@@ -1,4 +1,5 @@
 import { upload } from "youtube-videos-uploader"; //Typescript
+import { logger } from "../utils/logger";
 
 export const uploadToYoutube = async (
   path: string,
@@ -12,7 +13,7 @@ export const uploadToYoutube = async (
   };
 
   const onVideoUploadSuccess = (videoUrl: string) => {
-    console.log(`Video uploaded: ${videoUrl}`);
+    logger.info(`Video uploaded to YouTube: ${videoUrl}`);
   };
   // Extra options like tags, thumbnail, language, playlist etc
 
