@@ -12,7 +12,12 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
 
   const browser = await puppeteer.launch({
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--proxy-server='direct://'",
+      "--proxy-bypass-list=*",
+    ],
   });
   const page = await browser.newPage();
   await page.setUserAgent(
