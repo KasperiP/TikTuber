@@ -1,0 +1,29 @@
+{
+  "name": "tiktuber",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/main.ts",
+    "start": "npm run build && echo Starting bot && node dist/main.js",
+    "build": "echo Starting build && npx tsc -p . && echo Build complete"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^0.5.0",
+    "axios": "^0.27.2",
+    "discord.js": "^13.8.0",
+    "dotenv": "^16.0.1",
+    "mongoose": "^6.3.8",
+    "node-cron": "^3.0.1",
+    "puppeteer": "^14.4.0",
+    "ts-node": "^10.8.1",
+    "uuid": "^8.3.2",
+    "youtube-videos-uploader": "^1.3.53"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/node-cron": "^3.0.1",
+    "nodemon": "^2.0.16",
+    "typescript": "^4.7.3"
+  }
+}
