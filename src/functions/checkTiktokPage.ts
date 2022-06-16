@@ -42,7 +42,7 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
     videoLinks.length !== 1 ||
     !videoLinks[0].includes("v16-webapp.tiktok.com")
   ) {
-    logger.info("Coulnd't find video link. Skipping...");
+    logger.info("Couldn't find video link. Skipping...");
     await browser.close();
     return false;
   }
