@@ -21,11 +21,13 @@ export const checkTiktokPage = async (influencer: string): Promise<boolean> => {
   });
   const page = await browser.newPage();
   await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+    "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0"
   );
 
   try {
-    await page.goto(`${BASE_URL}/@${influencer}`);
+    await page.goto(`${BASE_URL}/@${influencer}`, {
+      waitUntil: "networkidle0",
+    });
   } catch (error) {
     await browser.close();
     logger.info("Loading page took too long. Skipping...");
